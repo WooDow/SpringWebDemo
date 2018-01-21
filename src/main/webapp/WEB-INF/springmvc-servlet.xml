@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xmlns:c="http://www.springframework.org/schema/c"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:jee="http://www.springframework.org/schema/jee"
+       xmlns:lang="http://www.springframework.org/schema/lang"
+       xmlns:p="http://www.springframework.org/schema/p"
+
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+          http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd
+          http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
+          http://www.springframework.org/schema/jee http://www.springframework.org/schema/jee/spring-jee.xsd
+          http://www.springframework.org/schema/lang http://www.springframework.org/schema/lang/spring-lang.xsd">
+ 
+ <context:component-scan base-package="tw.mymis.springwebdemo.controllers" /> 
+<bean id="viewResolver"  class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+        <property name="prefix" value="/WEB-INF/Views/"/>
+        <property name="suffix" value=".jsp"/>
+</bean>
+
+<!-- JPA套件, 自動尋找 /META-INF/persistence.xml -->
+<bean id="sjpa" class="org.springframework.orm.jpa.LocalEntityManagerFactoryBean">
+    <property name="persistenceUnitName" value="cm"/>
+</bean>
+<!--
+<bean id="product" class="model.Product" /> -->
+<bean class="model.User">    
+</bean>
+<bean class="model.C">
+    <property name="d">
+        <ref bean="md"/>
+    </property>
+    
+</bean>
+<bean id="md" class="model.D">
+    <constructor-arg>
+        <value>apple</value>
+    </constructor-arg>
+    <constructor-arg>
+        <value>orange</value>
+    </constructor-arg>
+    <property name="mesg">
+        <value>hello</value>
+    </property>
+</bean>
+
+<bean id="/abc.mvc" class="traditional.AbcController"></bean>
+<bean id="userController" class="cmdata.dao.UsersController">
+</bean>
+
+<!-- MultipartFile 要在 spring 設定檔設定 CommonsMultipartResolver 才可以接收檔案 -->
+<bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver"></bean>
+
+</beans>
